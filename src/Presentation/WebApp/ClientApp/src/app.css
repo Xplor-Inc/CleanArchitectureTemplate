@@ -1,0 +1,117 @@
+.svg-action {
+    font-size: 2rem;
+    cursor: pointer;
+}
+.icon-box{
+    position: absolute;
+    margin-left: -70px;
+    margin-top: -32px;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 0.3rem 0.5rem;
+    background: rgb(31, 65, 95);
+    color: white;
+}
+.selected-state {
+    color: white;
+    background: #1f415f;
+}
+
+td,
+th {
+    padding: 0.25rem !important;
+    white-space: nowrap;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}
+
+.popup-40 {
+    width: 40%;
+    left: 30%;
+}
+
+.row>[class^="col-"] {
+    margin-bottom: .5rem;
+}
+
+.bg-tags {
+    color: white;
+    background: gray;
+    padding: 0px 5px 4px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.sort-header-th {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#printableData td,
+#printableData th {
+    padding: 0 !important;
+    padding-left: 10px !important;
+    border: 1px solid black;
+    vertical-align: top;
+}
+
+#printableData strong {
+    font-weight: 700;
+}
+
+.text {
+    text-transform: capitalize;
+}
+
+.table> :not(caption)>*>* {
+    padding: 0.1rem .1rem !important;
+}
+
+.summary-Box {
+    font-size: 1.2rem !important;
+    color: white;
+    width: auto;
+    min-width: 100px;
+    max-width: 200px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 1rem 0.3rem 1rem 0.3rem ;
+    background-color: #6c757d;
+}
+
+.dashboard svg {
+    font-size: 1.7rem;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #printableData,
+    #printableData * {
+        visibility: visible;
+    }
+
+    #printableData {
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+    }
+
+    .popup {
+        width: 100%;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        position: initial;
+    }
+}

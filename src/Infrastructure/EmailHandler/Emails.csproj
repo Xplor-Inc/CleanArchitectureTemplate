@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyName>GenogramSystem.Emails</AssemblyName>
+		<RootNamespace>GenogramSystem.Emails</RootNamespace>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Business\Core\Core.csproj" />
+	</ItemGroup>
+
+</Project>
