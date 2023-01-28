@@ -1,7 +1,7 @@
-﻿using GenogramSystem.Core.Constants;
-using GenogramSystem.Core.Models.Entities.Users;
+﻿using CleanArchitectureTemplate.Core.Constants;
+using CleanArchitectureTemplate.Core.Models.Entities.Users;
 
-namespace GenogramSystem.SqlServer.Maps.Users;
+namespace CleanArchitectureTemplate.SqlServer.Maps.Users;
 public class UserMap : Map<User>
 {
     public override void Configure(EntityTypeBuilder<User> entity)

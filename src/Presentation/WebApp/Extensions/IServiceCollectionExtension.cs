@@ -1,17 +1,21 @@
-﻿using GenogramSystem.Core.Interfaces.Data;
-using GenogramSystem.Core.Models.Configuration;
-using GenogramSystem.Core.Models.Entities.Users;
-using GenogramSystem.Core.Models.Security;
-using GenogramSystem.WebApp.Utilities;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Data;
+using CleanArchitectureTemplate.Core.Models.Configuration;
+using CleanArchitectureTemplate.Core.Models.Entities.Users;
+using CleanArchitectureTemplate.Core.Models.Security;
+using CleanArchitectureTemplate.WebApp.Utilities;
 
-namespace GenogramSystem.WebApp.Extensions;
+namespace CleanArchitectureTemplate.WebApp.Extensions;
 public static class IServiceCollectionExtension
 {
     public static void AddCookieAuthentication(this IServiceCollection services, IConfigurationRoot configuration)
     {
-        services.AddSingleton((sp) => configuration.GetSection("Authentication").GetSection("Cookie").Get<CookieAuthenticationConfiguration>());
+        var cookieConfig = configuration.GetSection("Authentication").GetSection("Cookie").Get<CookieAuthenticationConfiguration>();
+        if(cookieConfig is null)
+        {
+            throw new NullReferenceException("Cookies is not configured");
+        }
+        services.AddSingleton((sp) => cookieConfig);
 
-        var cookieConfig    = configuration.GetSection("Authentication:Cookie").Get<CookieAuthenticationConfiguration>();
         var cookie          = new CookieBuilder()
         {
             Name        = cookieConfig.CookieName,
@@ -38,17 +42,21 @@ public static class IServiceCollectionExtension
     public static void AddContexts(this IServiceCollection services, string connectionString)
     {
         var loggerFactory = new Serilog.Extensions.Logging.SerilogLoggerFactory(Log.Logger, false);
-        services.AddDbContext<GenogramSystemContext>(ServiceLifetime.Scoped);
-        services.AddScoped((sp) => new GenogramSystemContext(connectionString, loggerFactory));
-        services.AddScoped<DataContext<User>>((sp) => new GenogramSystemContext(connectionString, loggerFactory));
-        services.AddScoped<IDataContext<User>>((sp) => new GenogramSystemContext(connectionString, loggerFactory));
-        services.AddScoped<IContext>((sp) => new GenogramSystemContext(connectionString, loggerFactory));
-        services.AddScoped<IGenogramSystemContext>((sp) => new GenogramSystemContext(connectionString, loggerFactory));
+        services.AddDbContext<CleanArchitectureTemplateContext>(ServiceLifetime.Scoped);
+        services.AddScoped((sp) => new CleanArchitectureTemplateContext(connectionString, loggerFactory));
+        services.AddScoped<DataContext<User>>((sp) => new CleanArchitectureTemplateContext(connectionString, loggerFactory));
+        services.AddScoped<IDataContext<User>>((sp) => new CleanArchitectureTemplateContext(connectionString, loggerFactory));
+        services.AddScoped<IContext>((sp) => new CleanArchitectureTemplateContext(connectionString, loggerFactory));
+        services.AddScoped<ICleanArchitectureTemplateContext>((sp) => new CleanArchitectureTemplateContext(connectionString, loggerFactory));
     }
 
     public static void AddConfigurationFiles(this IServiceCollection services, IConfigurationRoot configuration)
     {
-        services.AddSingleton((sp) => configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
-        services.AddSingleton((sp) => configuration.GetSection("StaticFileConfiguration").Get<StaticFileConfiguration>());
+        var fileConfiguration = configuration.GetSection("StaticFileConfiguration").Get<StaticFileConfiguration>();
+        if (fileConfiguration is null)
+        {
+            throw new NullReferenceException("FileConfiguration[StaticFileConfiguration] node is not configured");
+        }
+        services.AddSingleton((sp) => fileConfiguration);
     }
 }

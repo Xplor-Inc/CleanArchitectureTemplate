@@ -160,3 +160,8 @@ html {
     font-weight: 900;
     src: url(./fonts/fontawesome/fa-solid-900.woff2);
 }
+.terms {
+    float: left;
+    margin: 0 20px;
+    width: 21%;
+}

@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Models.Entities.Users;
+﻿namespace CleanArchitectureTemplate.Core.Models.Entities.Users;
 public class AccountRecovery : Auditable
 {
     public bool                 EmailSent                   { get; set; }

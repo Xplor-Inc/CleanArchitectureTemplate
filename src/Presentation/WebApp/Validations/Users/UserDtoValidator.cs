@@ -1,7 +1,7 @@
-﻿using GenogramSystem.Core.Constants;
-using GenogramSystem.WebApp.Models.Dtos.Users;
+﻿using CleanArchitectureTemplate.Core.Constants;
+using CleanArchitectureTemplate.WebApp.Models.Dtos.Users;
 
-namespace GenogramSystem.WebApp.Validations.Accounts;
+namespace CleanArchitectureTemplate.WebApp.Validations.Accounts;
 public class UserDtoValidator : AbstractValidator<UserDto>
 {
     public UserDtoValidator()

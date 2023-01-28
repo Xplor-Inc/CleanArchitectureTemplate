@@ -1,6 +1,6 @@
 {
-  "name": "genogramsystem",
-  "version": "0.2.0",
+  "name": "CleanArchitectureTemplate",
+  "version": "2.0.7",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.2",

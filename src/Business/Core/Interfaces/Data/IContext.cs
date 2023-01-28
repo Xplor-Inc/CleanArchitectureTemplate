@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Interfaces.Data;
+﻿namespace CleanArchitectureTemplate.Core.Interfaces.Data;
 public interface IContext : IDisposable
 {
     void                Add<T>(T entity) where T : class;

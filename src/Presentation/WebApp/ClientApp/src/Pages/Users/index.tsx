@@ -134,7 +134,8 @@ export default class Users extends Component<{}, { isUpdating: boolean, paging: 
         var formData = {
             firstName: firstName,
             lastName: lastName,
-            emailAddress: emailAddress
+            emailAddress: emailAddress,
+            gender: gender
         }
         var response = await Service.Post<IResult<IUserDto>>(API_END_POINTS.USERS, formData);
 
@@ -298,10 +299,10 @@ export default class Users extends Component<{}, { isUpdating: boolean, paging: 
                             <div className="col-md-2 button-pt">
                                 {
                                     isUpdating ? <>
-                                        <button type="button" className="btn btn-outline-info" onClick={() => this.updateUser(this.state.user)}> Update User</button>
-                                        <button type="button" className="btn btn-outline-danger ms-2"
+                                        <button type="button" className="btn btn-warning" onClick={() => this.updateUser(this.state.user)}> Update User</button>
+                                        <button type="button" className="btn btn-danger ms-2"
                                             onClick={() => this.resetUser()}> Reset</button> </>
-                                        : <button type="button" className="btn btn-outline-info" onClick={(e) => this.createUser(e)}> Add User</button>
+                                        : <button type="button" className="btn btn-primary" onClick={(e) => this.createUser(e)}> Add User</button>
                                 }
                             </div>
                         </div>
@@ -330,6 +331,7 @@ export default class Users extends Component<{}, { isUpdating: boolean, paging: 
                                     <th>Email Address</th>
                                     <th>Status</th>
                                     <th>Last Login</th>
+                                    <th>Last Logout</th>
                                     <th>Created On</th>
                                     <th>Action</th>
                                 </tr>
@@ -346,6 +348,7 @@ export default class Users extends Component<{}, { isUpdating: boolean, paging: 
                                             <td>{user.emailAddress}</td>
                                             <td><div className={"bg-tags " + (user.isActive ? "bg-success" : "bg-danger")}>{user.isActive ? "Active" : "De-Active"}</div></td>
                                             <td>{Utility.Format.DateTime_DD_MMM_YY_HH_MM_SS(user.lastLoginDate)}</td>
+                                            <td>{Utility.Format.DateTime_DD_MMM_YY_HH_MM_SS(user.lastLogoutDate)}</td>
                                             <td>{Utility.Format.DateTime_DD_MMM_YY_HH_MM_SS(user.createdOn)}</td>
                                             <td>
                                                 {

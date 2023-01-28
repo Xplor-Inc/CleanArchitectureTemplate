@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Models.Entities.Users;
+﻿namespace CleanArchitectureTemplate.Core.Models.Entities.Users;
 public class User : Auditable
 {
     #region Properties
@@ -11,6 +11,7 @@ public class User : Auditable
     public bool             IsAccountActivated      { get; set; }
     public bool             IsActive                { get; set; }
     public DateTimeOffset?  LastLoginDate           { get; set; }
+    public DateTimeOffset?  LastLogoutDate          { get; set; }
     public string           LastName                { get; set; } = string.Empty;
     public DateTimeOffset?  PasswordChangeDate      { get; set; }
     public string           PasswordHash            { get; set; } = string.Empty;

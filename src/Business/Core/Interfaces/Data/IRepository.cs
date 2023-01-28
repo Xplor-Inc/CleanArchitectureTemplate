@@ -1,6 +1,6 @@
-﻿using GenogramSystem.Core.Models.Entities;
+﻿using CleanArchitectureTemplate.Core.Models.Entities;
 
-namespace GenogramSystem.Core.Interfaces.Data;
+namespace CleanArchitectureTemplate.Core.Interfaces.Data;
 public interface IRepository<T> where T :  Entity
 {
     Result<T>             Create(T item, long createdById);

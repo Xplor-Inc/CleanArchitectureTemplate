@@ -1,6 +1,6 @@
-﻿using GenogramSystem.Core.Models.Errors;
+﻿using CleanArchitectureTemplate.Core.Models.Errors;
 
-namespace GenogramSystem.WebApp;
+namespace CleanArchitectureTemplate.WebApp;
 public abstract class ControllerController : Controller
 {
     #region Results

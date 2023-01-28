@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.WebApp.Models.Dtos;
+﻿namespace CleanArchitectureTemplate.WebApp.Models.Dtos;
 
 public class EntityDto
 {

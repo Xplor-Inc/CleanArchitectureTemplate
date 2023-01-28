@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.WebApp.Controllers;
+﻿namespace CleanArchitectureTemplate.WebApp.Controllers;
 
 public class HomeController : BaseController
 {

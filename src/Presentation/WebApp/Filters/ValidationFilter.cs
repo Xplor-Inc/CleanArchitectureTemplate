@@ -1,6 +1,6 @@
-﻿using GenogramSystem.WebApp.Extensions.Validation;
+﻿using CleanArchitectureTemplate.WebApp.Extensions.Validation;
 
-namespace GenogramSystem.WebApp.Filters
+namespace CleanArchitectureTemplate.WebApp.Filters
 {
     public class ValidationFilter : ActionFilterAttribute
     {

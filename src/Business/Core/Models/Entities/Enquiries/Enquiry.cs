@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Models.Entities.Enquiries;
+﻿namespace CleanArchitectureTemplate.Core.Models.Entities.Enquiries;
 public class Enquiry : Auditable
 {
     public new long?        CreatedById         { get; set; }

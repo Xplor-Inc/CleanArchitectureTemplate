@@ -27,7 +27,6 @@ a.navbar-brand {
 }
 .navbar-brand img {
     height: 25px;
-    border-radius: 50%;
 }
 nav {
     z-index: 99;

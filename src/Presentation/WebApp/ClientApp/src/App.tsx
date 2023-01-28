@@ -10,38 +10,38 @@ import Users from './Pages/Users';
 import Profile from './Pages/Profile';
 import Enquiry from './Pages/Enquiry';
 import { useSelector } from 'react-redux';
-import Visitors from './Pages/Visits';
 import './app.css'
+import NotificationMarque from './Pages/Components/NotificationMarque';
+import NotificationPage from './Pages/Notifications';
+import { IUserHookState } from './ReduxStore/hooks';
+import { UserRoles } from './Components/Enums';
+import NotFoundPage from './Pages/NotFoundPage';
 
-interface StateType {
-    name: string
-    image: string,
-    isLoggedIn: boolean
-}
 const App = () => {
-    const profile = useSelector<any, StateType>((state) => state.user)
+    const profile = useSelector<any, IUserHookState>((state) => state.user)
 
-    var isLogedIn = profile.isLoggedIn;
     return (
         <BrowserRouter>
             <Layout>
+                {profile.isLoggedIn && <NotificationMarque />}
                 <Routes>
-                    {
-                        isLogedIn ? //Only add routes if user is logged In.
-                            <>
-                                <Route path={ROUTE_END_POINTS.USERS} element={<Users />} />
-                                <Route path={ROUTE_END_POINTS.CHANGE_PASSWORD} element={<ChangePassword />} />
-                                <Route path={ROUTE_END_POINTS.USER_PROFILE} element={<Profile />} />
-                                <Route path={ROUTE_END_POINTS.ENQUIRY} element={<Enquiry />} />
-                                <Route path={ROUTE_END_POINTS.VISITORS} element={<Visitors />} />
-                            </>
-                            : null}
-
+                    {profile.isLoggedIn &&
+                        <>
+                            <Route path={ROUTE_END_POINTS.CHANGE_PASSWORD} element={<ChangePassword />} />
+                            <Route path={ROUTE_END_POINTS.USER_PROFILE} element={<Profile />} />
+                        </>}
+                    {profile.isLoggedIn && profile.role === UserRoles.Admin &&
+                        <>
+                            <Route path={ROUTE_END_POINTS.USERS} element={<Users />} />
+                            <Route path={ROUTE_END_POINTS.NOTIFICATIONS} element={<NotificationPage />} />
+                            <Route path={ROUTE_END_POINTS.ENQUIRY} element={<Enquiry />} />
+                        </>
+                    }
                     <Route path={ROUTE_END_POINTS.LOGIN} element={<Login />} />
                     <Route path={ROUTE_END_POINTS.FORGET_PASSWORD} element={<ForgetPassword />} />
                     <Route path={`${ROUTE_END_POINTS.PASSWORD_RECOVERY}/:Id/:Guid/:EmailAddress`} element={<PasswordRecovery />} />
                     <Route path={`${ROUTE_END_POINTS.ACCOUNTACTIVATION}/:Id/:Guid/:EmailAddress`} element={<PasswordRecovery />} />
-
+                    <Route path='*' element={<NotFoundPage />} />
                 </Routes>
             </Layout>
         </BrowserRouter>

@@ -1,45 +1,36 @@
-﻿using GenogramSystem.Core.Enumerations;
-using GenogramSystem.Core.Interfaces.Conductors.Accounts;
-using GenogramSystem.Core.Interfaces.Emails.EmailHandler;
-using GenogramSystem.Core.Interfaces.Emails.Templates;
-using GenogramSystem.Core.Models.Configuration;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Conductors.Accounts;
+using CleanArchitectureTemplate.Core.Models.Configuration;
 
-namespace GenogramSystem.WebApp.EndPoints.Users;
+namespace CleanArchitectureTemplate.WebApp.EndPoints.Users;
 
 [Route("api/1.0/users")]
 [AppAuthorize(UserRole.Admin)]
-public class UsersController : GenogramSystemController
+public class UsersController : CleanArchitectureTemplateController
 {
     #region Properties
-    private IAccountConductor           AccountConductor    { get; }
-    public EmailConfiguration           EmailConfiguration  { get; }
-    private IEmailHandler               EmailHandler        { get; }
-    private IHtmlTemplate               HtmlTemplate        { get; }
-    private ILogger<UsersController>    Logger              { get; }
-    private IMapper                     Mapper              { get; }
-    private StaticFileConfiguration     StaticFile          { get; }
-    private IRepositoryConductor<User>  UserConductor       { get; }
+    private IAccountConductor                       AccountConductor            { get; }
+    public IRepositoryConductor<AccountRecovery>    AccountRecoveryRepository   { get; }
+    private ILogger<UsersController>                Logger                      { get; }
+    private IMapper                                 Mapper                      { get; }
+    private StaticFileConfiguration                 StaticFile                  { get; }
+    private IRepositoryConductor<User>              UserConductor               { get; }
     #endregion
 
     #region Constructor
     public UsersController(
-        IAccountConductor           accountConductor,
-        EmailConfiguration          emailConfiguration,
-        IEmailHandler               emailHandler,
-        IHtmlTemplate               htmlTemplate,
-        ILogger<UsersController>    logger,
-        IMapper                     mapper,
-        StaticFileConfiguration     staticFile,
-        IRepositoryConductor<User>  userConductor)
+        IAccountConductor                       accountConductor,
+        IRepositoryConductor<AccountRecovery>   accountRecoveryRepository,
+        ILogger<UsersController>                logger,
+        IMapper                                 mapper,
+        StaticFileConfiguration                 staticFile,
+        IRepositoryConductor<User>              userConductor)
     {
-        AccountConductor    = accountConductor;
-        EmailConfiguration  = emailConfiguration;
-        EmailHandler        = emailHandler;
-        HtmlTemplate        = htmlTemplate;
-        Logger              = logger;
-        Mapper              = mapper;
-        StaticFile          = staticFile;
-        UserConductor       = userConductor;
+        AccountConductor            = accountConductor;
+        AccountRecoveryRepository   = accountRecoveryRepository;
+        Logger                      = logger;
+        Mapper                      = mapper;
+        StaticFile                  = staticFile;
+        UserConductor               = userConductor;
     }
     #endregion
 
@@ -90,27 +81,6 @@ public class UsersController : GenogramSystemController
         user.ImagePath  = StaticFile.ProfileImageName;
         var createResult = AccountConductor.CreateAccount(user, CurrentUserId);
         if (createResult.HasErrors)
-        {
-            return InternalError<UserDto>(createResult.Errors);
-        }
-
-        var accountActivationLink = $"{EmailConfiguration.Templates.ResetPasswordLink}/{user.UniqueId}/{user.SecurityStamp}/{user.EmailAddress}";
-        Dictionary<string, string> substitutions = new()
-        {
-            { "Name", user.FirstName },
-            { "AccountActivationLink", accountActivationLink }
-        };
-        string emailbody = HtmlTemplate.AccountActivation(substitutions);
-        bool emailSent = EmailHandler.Send(emailbody, "Account Activation", new string[] { user.EmailAddress });
-
-        user.ActivationEmailSent = emailSent;
-        if (emailSent)
-            Logger.LogInformation("Account Activation email sent successfully to {user.EmailAddress}", user.EmailAddress);
-        else
-            Logger.LogInformation("Account Activation email sending error to {user.EmailAddress}", user.EmailAddress);
-
-        var updateResult = AccountConductor.CreateAccount(user, CurrentUserId);
-        if (updateResult.HasErrors)
         {
             return InternalError<UserDto>(createResult.Errors);
         }

@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Models.Configuration;
+﻿namespace CleanArchitectureTemplate.Core.Models.Configuration;
 public class StaticFileConfiguration
 {
     public List<string> AllowedExtention    { get; set; } = new List<string>();

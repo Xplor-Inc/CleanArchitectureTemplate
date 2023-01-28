@@ -1,13 +1,13 @@
-﻿using GenogramSystem.Core.Conductors;
-using GenogramSystem.Core.Conductors.Users;
-using GenogramSystem.Core.Interfaces.Conductor;
-using GenogramSystem.Core.Interfaces.Conductors.Accounts;
-using GenogramSystem.Core.Interfaces.Utility;
-using GenogramSystem.Core.Interfaces.Utility.Security;
-using GenogramSystem.Core.Utilities;
-using GenogramSystem.Core.Utilities.Security;
+﻿using CleanArchitectureTemplate.Core.Conductors;
+using CleanArchitectureTemplate.Core.Conductors.Users;
+using CleanArchitectureTemplate.Core.Interfaces.Conductor;
+using CleanArchitectureTemplate.Core.Interfaces.Conductors.Accounts;
+using CleanArchitectureTemplate.Core.Interfaces.Utility;
+using CleanArchitectureTemplate.Core.Interfaces.Utility.Security;
+using CleanArchitectureTemplate.Core.Utilities;
+using CleanArchitectureTemplate.Core.Utilities.Security;
 
-namespace GenogramSystem.Core.Extensions.Middleware;
+namespace CleanArchitectureTemplate.Core.Extensions.Middleware;
 public static class IServiceColletionsStartup
 {
     public static void AddUtilityResolver(this IServiceCollection services)

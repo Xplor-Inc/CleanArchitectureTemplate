@@ -1,11 +1,9 @@
-﻿using GenogramSystem.Core.Interfaces.Data;
-using GenogramSystem.Core.Models.Entities;
-using GenogramSystem.Core.Models.Entities.Audits;
-using GenogramSystem.Core.Models.Entities.Users;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Data;
+using CleanArchitectureTemplate.Core.Models.Entities;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace GenogramSystem.SqlServer
+namespace CleanArchitectureTemplate.SqlServer
 {
     public class DataContext<TUser> : Context, IDataContext<TUser>
         where TUser : User
@@ -71,23 +69,21 @@ namespace GenogramSystem.SqlServer
                     string entityName = change.Entity.GetType().Name;
                     long primaryKey = ((Entity)change.Entity).Id;
                     var changeLogs = new List<ChangeLog>();
-                    if (change.CurrentValues["UpdatedById"] != null)
+                    var updatedById = change.CurrentValues["UpdatedById"]?.ToString();
+                    if(long.TryParse(change.CurrentValues["UpdatedById"]?.ToString(), out actionBy))
                     {
-                        actionBy = (long)change.CurrentValues["UpdatedById"];
-                    }
-                    if (actionBy == 0 && change.CurrentValues["CreatedById"] != null)
-                    {
-                        actionBy = (long)change.CurrentValues["CreatedById"];
+                        if(actionBy == 0 && long.TryParse(change.CurrentValues["UpdatedById"]?.ToString(), out actionBy)) 
+                        {
+                        }
                     }
 
                     foreach (var prop in change.OriginalValues.Properties)
                     {
                         if (IgnoredProperties.Contains(prop.Name))
-                        {
                             continue;
-                        }
+
                         var originalValue = change.OriginalValues[prop]?.ToString();
-                        var currentValue = change.CurrentValues[prop]?.ToString();
+                        var currentValue  = change.CurrentValues[prop]?.ToString();
                         if (originalValue != currentValue) //Only create a log if the value changes
                         {
                             changeLogs.Add(new ChangeLog()
@@ -111,7 +107,7 @@ namespace GenogramSystem.SqlServer
             return base.SaveChanges();
         }
 
-        public string[] IgnoredProperties => new string[] { "CreatedOn", "UpdatedOn", "Id" };
+        public string[] IgnoredProperties => new string[] { "CreatedOn", "UpdatedOn", "Id", "UniqueId" };
 
 
         #endregion Overrides of DataContext

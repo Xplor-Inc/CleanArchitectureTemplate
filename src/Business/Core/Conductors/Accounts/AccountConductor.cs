@@ -1,21 +1,16 @@
-﻿using GenogramSystem.Core.Interfaces.Conductor;
-using GenogramSystem.Core.Interfaces.Conductors.Accounts;
-using GenogramSystem.Core.Interfaces.Emails.EmailHandler;
-using GenogramSystem.Core.Interfaces.Emails.Templates;
-using GenogramSystem.Core.Interfaces.Utility;
-using GenogramSystem.Core.Interfaces.Utility.Security;
-using GenogramSystem.Core.Models.Entities.Audits;
-using GenogramSystem.Core.Models.Entities.Users;
-using GenogramSystem.Core.Utilities;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Conductor;
+using CleanArchitectureTemplate.Core.Interfaces.Conductors.Accounts;
+using CleanArchitectureTemplate.Core.Interfaces.Utility;
+using CleanArchitectureTemplate.Core.Interfaces.Utility.Security;
+using CleanArchitectureTemplate.Core.Utilities;
 
-namespace GenogramSystem.Core.Conductors.Users;
+namespace CleanArchitectureTemplate.Core.Conductors.Users;
 public class AccountConductor : IAccountConductor
 {
     #region Properties
     private IRepositoryConductor<AccountRecovery>   AccountRecoveryRepository   { get; }
     private IEncryption                             Encryption                  { get; }
     public  IWebHostEnvironment                     Environment                 { get; }
-    public IHtmlTemplate                            HtmlTemplate                { get; }
     private IHttpContextAccessor                    HttpContext                 { get; }
     public IUserAgentConductor                      UserAgentConductor          { get; }
     private ILogger<AccountConductor>               Logger                      { get; }
@@ -29,7 +24,6 @@ public class AccountConductor : IAccountConductor
         IRepositoryConductor<AccountRecovery>   accountRecoveryRepository,
         IEncryption                             encryption,
         IWebHostEnvironment                     environment,
-        IHtmlTemplate                           htmlTemplate,
         ILogger<AccountConductor>               logger,
         IHttpContextAccessor                    httpContext,
         IUserAgentConductor                     userAgentConductor,
@@ -39,7 +33,6 @@ public class AccountConductor : IAccountConductor
         AccountRecoveryRepository   = accountRecoveryRepository;
         Encryption                  = encryption;
         Environment                 = environment;
-        HtmlTemplate                = htmlTemplate;
         Logger                      = logger;
         HttpContext                 = httpContext;
         UserAgentConductor          = userAgentConductor;
@@ -189,6 +182,29 @@ public class AccountConductor : IAccountConductor
         }
 
         return user;
+    }).Result;
+
+    public Result<bool> UpdateLogout(long userId) => Do<bool>.Try(r =>
+    {
+        var userResult = UserRepository.FindById(userId);
+        if (userResult.HasErrors)
+        {
+            r.AddErrors(userResult.Errors);
+            return false;
+        }
+        var user = userResult.ResultObject;
+        if (user != null)
+        {
+            user.LastLogoutDate = DateTimeOffset.Now;
+            var userUpdateCreateResult = UserRepository.Update(user, user.Id);
+            if (userUpdateCreateResult.HasErrors)
+            {
+                r.AddErrors(userUpdateCreateResult.Errors);
+                return false;
+            }
+            return true;
+        }
+        return false;
     }).Result;
 
     public Result<bool> ResetPasswordByEmailLink(string emailAddress, string link, string password) => Do<bool>.Try(r =>

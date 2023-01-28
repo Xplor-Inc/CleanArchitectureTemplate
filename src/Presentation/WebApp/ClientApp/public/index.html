@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <link href="~/Images/favicon.jpg" type="image/x-icon" rel="icon" />
+    <link href="/Images/icon.jpeg" type="image/x-icon" rel="icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
@@ -13,6 +13,21 @@
     <link href="/lib/css/NavMenu.css" rel="stylesheet" type="text/css" async />
 
     <title></title>
+    <script>
+        countr = () => {
+            var config = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': 'Allow',
+                },
+                body: JSON.stringify({ page: window.location.pathname, search: decodeURI(window.location.search) })
+            }
+            fetch("/api/1.0/counter", config).then(response => response).then(_ => {
+            });
+        }
+        window.onload = countr;
+    </script>
 </head>
 
 <body>

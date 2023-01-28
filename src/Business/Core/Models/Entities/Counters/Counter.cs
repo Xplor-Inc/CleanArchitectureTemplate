@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Models.Entities.Counters;
+﻿namespace CleanArchitectureTemplate.Core.Models.Entities.Counters;
 
 public class Counter : Entity
 {

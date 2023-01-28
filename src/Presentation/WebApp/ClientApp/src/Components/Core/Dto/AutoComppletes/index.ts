@@ -1,5 +1,4 @@
 export interface IAutoCompleteDto {
-    name?: string;
-    id: number;
-    isCrawlable?:boolean
+    name?: string
+    id: number
 }

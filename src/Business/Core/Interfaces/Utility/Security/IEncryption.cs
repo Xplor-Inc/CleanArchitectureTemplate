@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Interfaces.Utility.Security;
+﻿namespace CleanArchitectureTemplate.Core.Interfaces.Utility.Security;
 public interface IEncryption
 {
     string GenerateSalt();

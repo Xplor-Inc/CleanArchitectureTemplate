@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.SqlServer.Maps.Enquiries;
+﻿namespace CleanArchitectureTemplate.SqlServer.Maps.Enquiries;
 public class CounterMap : Map<Counter>
 {
     public override void Configure(EntityTypeBuilder<Counter> entity)

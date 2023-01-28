@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { UserRoles } from '../Components/Enums';
-import { UserState } from './hooks'
+import { IUserHookState } from './hooks'
 
 var initialState = {
     isLoggedIn: false,
@@ -8,12 +8,12 @@ var initialState = {
     image: '/No_image_available.jpg',
     role: UserRoles.Member,
     currentUserId: ''
-} as UserState
+} as IUserHookState
 
 var p = localStorage.getItem('profile'); // get profile data if exists
 var cookie = window.document.cookie.includes('AS');
 if (p && cookie) {
-    var pObj = JSON.parse(p) as UserState;
+    var pObj = JSON.parse(p) as IUserHookState;
     initialState = pObj;
 }
 
@@ -32,7 +32,7 @@ export const userProfileSlice = createSlice({
     }
 })
 
-const updateStorage = (data: UserState) => {
+const updateStorage = (data: IUserHookState) => {
     var profile = JSON.stringify(data);
     localStorage.setItem('profile', profile);
 }

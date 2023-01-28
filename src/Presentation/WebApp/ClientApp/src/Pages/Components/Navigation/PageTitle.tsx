@@ -10,7 +10,7 @@ const PageTitle = (props: defaultProps) => {
     titleElement = document.getElementsByTagName('title')[0] as HTMLElement;
 
     const { title } = props
-    let pageTitle = !title ? 'AS Express Cargo' : title + ' :: AS Express Cargo';
+    let pageTitle = !title ? 'Xploring Me' : title + ' :: Xploring Me';
 
     return (
         ReactDOM.createPortal(

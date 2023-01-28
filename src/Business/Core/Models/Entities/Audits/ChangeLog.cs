@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Models.Entities.Audits;
+﻿namespace CleanArchitectureTemplate.Core.Models.Entities.Audits;
 public class ChangeLog : Entity
 {
     public string   EntityName          { get; set; } = string.Empty;

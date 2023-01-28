@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.WebApp.Models.Dtos.Accounts;
+﻿namespace CleanArchitectureTemplate.WebApp.Models.Dtos.Accounts;
 
 public class ResetPasswordWithEmail : ValidateEmailLinkDto
 {

@@ -1,10 +1,9 @@
-using GenogramSystem.Core.Extensions;
-using GenogramSystem.Core.Interfaces.Data;
-using GenogramSystem.Core.Models.Entities;
-using Microsoft.Extensions.Logging;
+using CleanArchitectureTemplate.Core.Extensions;
+using CleanArchitectureTemplate.Core.Interfaces.Data;
+using CleanArchitectureTemplate.Core.Models.Entities;
 using System.Text;
 
-namespace GenogramSystem.SqlServer.Repositories;
+namespace CleanArchitectureTemplate.SqlServer.Repositories;
 public class Repository<T> : IRepository<T>
     where T : Entity
 {
@@ -122,7 +121,7 @@ public class Repository<T> : IRepository<T>
         {
             if (entity == null)
             {
-                result.AddError($"{entity.GetType()} does not exist.");
+                result.AddError($"entity does not exist.");
                 return result;
             }
 
@@ -154,11 +153,11 @@ public class Repository<T> : IRepository<T>
 
         return result;
     }
-    public virtual Result<IQueryable<T>> FindAll(Expression<Func<T, bool>> filter = null,
-        Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null,
+    public virtual Result<IQueryable<T>> FindAll(Expression<Func<T, bool>>? filter = null,
+        Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null, string? includeProperties = null,
         int? skip = null, int? take = null, bool? ignoreQueryFilters = false, bool asNoTracking = false)
     {
-        var result = new Result<IQueryable<T>>(default);
+        var result = new Result<IQueryable<T>>(default!);
 
         try
         {
@@ -174,7 +173,7 @@ public class Repository<T> : IRepository<T>
 
     public virtual Result<T> FindById(long id, bool includeDeleted = false, params string[] includeProperties)
     {
-        Result<T> result = new(default);
+        Result<T> result = default!;
 
         try
         {
@@ -189,11 +188,11 @@ public class Repository<T> : IRepository<T>
             }
             if (includeDeleted)
             {
-                result.ResultObject = query.FirstOrDefault(e => e.Id == id);
+                result.ResultObject = query.FirstOrDefault(e => e.Id == id) ?? default!;
             }
             else
             {
-                result.ResultObject = query.FirstOrDefault(e => e.Id == id);
+                result.ResultObject = query.FirstOrDefault(e => e.Id == id) ?? default!;
             }
         }
         catch (Exception ex)
@@ -267,8 +266,8 @@ public class Repository<T> : IRepository<T>
 
     #region Protected Methods
 
-    public virtual IQueryable<T> GetQueryable(Expression<Func<T, bool>> filter = null,
-        Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null,
+    public virtual IQueryable<T> GetQueryable(Expression<Func<T, bool>>? filter = null,
+        Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null, string? includeProperties = null,
         int? skip = null, int? take = null, bool? ignoreQueryFilters = false, bool asNoTracking = false)
     {
         includeProperties ??= string.Empty;
@@ -317,15 +316,16 @@ public class Repository<T> : IRepository<T>
     #region Private Method
     private List<string> HandleException(Exception ex)
     {
-        StringBuilder builder = new StringBuilder($"Exception : {ex.Message}");
+        StringBuilder builder = new ($"Exception : {ex.Message}");
         builder.AppendLine($"StackTrace : {ex.StackTrace}");
         if(ex.InnerException is not null)
         {
             builder.AppendLine($"nInnerException : {ex.InnerException.Message}");
             builder.AppendLine($"StackTrace : {ex.InnerException.StackTrace}");
         }
-        Logger.LogError(builder.ToString());
-        return new List<string> { ex.InnerException != null ? ex.InnerException.Message : ex.Message };
+        var error = builder.ToString();
+        Logger.LogError("{error}",error);
+        return new List<string> { error };
     }
 
     #endregion

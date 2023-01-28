@@ -1,10 +1,10 @@
-﻿using GenogramSystem.Core.Models.Entities.Users;
-using GenogramSystem.WebApp.Models.Dtos.Users;
-namespace GenogramSystem.WebApp.EndPoints.Users;
+﻿using CleanArchitectureTemplate.Core.Models.Entities.Users;
+using CleanArchitectureTemplate.WebApp.Models.Dtos.Users;
+namespace CleanArchitectureTemplate.WebApp.EndPoints.Users;
 
 [Route("api/1.0/users/profile")]
 [AppAuthorize]
-public class UserProfileController : GenogramSystemController
+public class UserProfileController : CleanArchitectureTemplateController
 {
     public IMapper                      Mapper          { get; }
     public IRepositoryConductor<User>   UserConductor   { get; }

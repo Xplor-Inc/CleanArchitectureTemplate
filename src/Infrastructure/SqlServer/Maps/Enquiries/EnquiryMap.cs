@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.SqlServer.Maps.Enquiries;
+﻿namespace CleanArchitectureTemplate.SqlServer.Maps.Enquiries;
 public class EnquiryMap : Map<Enquiry>
 {
     public override void Configure(EntityTypeBuilder<Enquiry> entity)

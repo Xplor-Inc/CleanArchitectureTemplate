@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Interfaces.Conductor;
+﻿namespace CleanArchitectureTemplate.Core.Interfaces.Conductor;
 public interface IRepositoryConductor<T>   where T : Models.Entities.Entity
 {
     Result<T>              Create(T item, long createdById);

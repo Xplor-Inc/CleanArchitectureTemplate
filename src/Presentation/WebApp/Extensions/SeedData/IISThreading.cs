@@ -1,6 +1,6 @@
 ﻿using System.Timers;
 
-namespace GenogramSystem.WebApp.Extensions.SeedData;
+namespace CleanArchitectureTemplate.WebApp.Extensions.SeedData;
 
 public static class IISThreading
 {

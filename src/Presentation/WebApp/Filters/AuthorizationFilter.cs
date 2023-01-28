@@ -1,7 +1,7 @@
-﻿using GenogramSystem.Core.Enumerations;
+﻿using CleanArchitectureTemplate.Core.Enumerations;
 using System.Security.Claims;
 
-namespace GenogramSystem.WebApp.Filters;
+namespace CleanArchitectureTemplate.WebApp.Filters;
 
 public class AuthorizationFilter : IAuthorizationFilter
 {

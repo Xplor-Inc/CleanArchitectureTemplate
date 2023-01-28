@@ -1,12 +1,12 @@
-﻿using GenogramSystem.Core.Interfaces.Utility;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Utility;
 
-namespace GenogramSystem.WebApp.EndPoints.Counters;
+namespace CleanArchitectureTemplate.WebApp.EndPoints.Counters;
 
 [Route("api/1.0/counter")]
-public class CounterController : GenogramSystemController
+public class CounterController : CleanArchitectureTemplateController
 {
     private IMapper Mapper { get; }
-    private GenogramSystemContext DbContext { get { return HttpContext.RequestServices.GetRequiredService<GenogramSystemContext>(); } }
+    private CleanArchitectureTemplateContext DbContext { get { return HttpContext.RequestServices.GetRequiredService<CleanArchitectureTemplateContext>(); } }
 
     public CounterController(IMapper mapper)
     {

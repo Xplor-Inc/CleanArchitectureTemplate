@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.SqlServer.Maps.Audits;
+﻿namespace CleanArchitectureTemplate.SqlServer.Maps.Audits;
 public class UserLoginMap : Map<UserLogin>
 {
     public override void Configure(EntityTypeBuilder<UserLogin> entity)

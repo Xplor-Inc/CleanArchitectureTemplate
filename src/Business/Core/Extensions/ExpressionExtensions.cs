@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Extensions;
+﻿namespace CleanArchitectureTemplate.Core.Extensions;
 public static class ExpressionExtensions
 {
     public static Expression<Func<T, bool>> AndAlso<T>(this Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2)

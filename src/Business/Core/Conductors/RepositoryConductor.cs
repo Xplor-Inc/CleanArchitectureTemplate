@@ -1,8 +1,8 @@
-﻿using GenogramSystem.Core.Interfaces.Conductor;
-using GenogramSystem.Core.Interfaces.Data;
-using GenogramSystem.Core.Models.Entities;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Conductor;
+using CleanArchitectureTemplate.Core.Interfaces.Data;
+using CleanArchitectureTemplate.Core.Models.Entities;
 
-namespace GenogramSystem.Core.Conductors;
+namespace CleanArchitectureTemplate.Core.Conductors;
 public class RepositoryConductor<T> : IRepositoryConductor<T>  where T : Entity
 {
     public IRepository<T> Repository { get; }

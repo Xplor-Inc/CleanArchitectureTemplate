@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Utilities.Errors;
+﻿namespace CleanArchitectureTemplate.Core.Utilities.Errors;
 public static class Try
 {
     public static bool Catch(Action action)

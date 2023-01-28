@@ -1,7 +1,7 @@
 ﻿using UAParser;
-using GenogramSystem.Core.Interfaces.Utility;
+using CleanArchitectureTemplate.Core.Interfaces.Utility;
 
-namespace GenogramSystem.Core.Utilities;
+namespace CleanArchitectureTemplate.Core.Utilities;
 
 public class UserAgentConductor : IUserAgentConductor
 {
@@ -26,7 +26,7 @@ public class UserAgentConductor : IUserAgentConductor
         string ipAddress = context.Connection.RemoteIpAddress?.ToString() ?? string.Empty;
         if (req.Headers.ContainsKey("X-Forwarded-For") && !string.IsNullOrWhiteSpace(req.Headers["X-Forwarded-For"]))
         {
-            ipAddress = req.Headers["X-Forwarded-For"];
+            ipAddress = req.Headers["X-Forwarded-For"].ToString() ?? string.Empty;
         }
         return (ipAddress, operatingSystem, browser, device);
     }

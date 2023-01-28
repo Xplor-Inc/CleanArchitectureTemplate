@@ -12,10 +12,10 @@ builder.Host.UseSerilog((ctx, lc) => lc
                 .ReadFrom.Configuration(ctx.Configuration));
 Log.Logger.Information("App is starting.....");
 
-var connectionString = builder.Configuration.GetConnectionString("GenogramSystem");
+var connectionString = builder.Configuration.GetConnectionString("CleanArchitectureTemplate") ?? string.Empty;
 builder.Services.AddLogging();
-builder.Services.AddDbContextPool<GenogramSystemContext>(
-                         opentions => opentions.UseMySql(connectionString: connectionString, serverVersion: ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContextPool<CleanArchitectureTemplateContext>(
+                         options => options.UseSqlServer(connectionString: connectionString));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -30,7 +30,6 @@ builder.Services.AddControllersWithViews(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSqlRepository();
-builder.Services.AddEmailHandler();
 builder.Services.AddCookieAuthentication(builder.Configuration);
 builder.Services.AddUtilityResolver();
 builder.Services.AddContexts(connectionString);

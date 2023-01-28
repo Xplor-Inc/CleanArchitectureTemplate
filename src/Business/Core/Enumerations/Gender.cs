@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Enumerations;
+﻿namespace CleanArchitectureTemplate.Core.Enumerations;
 public enum Gender
 {
     Male    = 1,

@@ -1,6 +1,6 @@
-﻿using GenogramSystem.Core.Interfaces.Data;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Data;
 
-namespace GenogramSystem.Core.Models.Configurations;
+namespace CleanArchitectureTemplate.Core.Models.Configurations;
 public class Connection : IConnection
 {
     #region Properties

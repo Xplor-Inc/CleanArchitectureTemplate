@@ -1,6 +1,6 @@
-﻿using GenogramSystem.Core.Extensions;
+﻿using CleanArchitectureTemplate.Core.Extensions;
 
-namespace GenogramSystem.SqlServer.Models.Configuration
+namespace CleanArchitectureTemplate.SqlServer.Models.Configuration
 {
     public class Connection : Core.Models.Configurations.Connection
     {

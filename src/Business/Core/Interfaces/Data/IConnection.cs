@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Interfaces.Data;
+﻿namespace CleanArchitectureTemplate.Core.Interfaces.Data;
 public interface IConnection
 {
     #region Properties

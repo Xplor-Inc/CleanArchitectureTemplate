@@ -1,6 +1,6 @@
-﻿using GenogramSystem.Core.Models.Entities.Users;
+﻿using CleanArchitectureTemplate.Core.Models.Entities.Users;
 
-namespace GenogramSystem.Core.Interfaces.Data;
+namespace CleanArchitectureTemplate.Core.Interfaces.Data;
 public interface IDataContext<TUser> : IContext
         where TUser : User
 {

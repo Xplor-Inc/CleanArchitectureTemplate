@@ -5,9 +5,10 @@ export interface IUserDto extends IAuditableDto {
     emailAddress?: string;
     firstName?: string;
     isActive?: boolean
-    imagePath? : string
+    imagePath?: string
     lastLoginDate?: Date | null;
+    lastLogoutDate?: Date | null
     lastName?: string
-    role?:UserRoles
-    gender?:Gender
+    role?: UserRoles
+    gender?: Gender
 }

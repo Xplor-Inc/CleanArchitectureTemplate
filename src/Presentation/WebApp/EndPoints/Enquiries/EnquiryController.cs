@@ -1,34 +1,27 @@
-﻿using GenogramSystem.Core.Interfaces.Emails.EmailHandler;
-using GenogramSystem.Core.Interfaces.Emails.Templates;
-using GenogramSystem.Core.Interfaces.Utility;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Utility;
 
-namespace GenogramSystem.WebApp.EndPoints.Enquiries;
+namespace CleanArchitectureTemplate.WebApp.EndPoints.Enquiries;
 
 [Route("api/1.0/enquiries")]
-public class EnquiryController : GenogramSystemController
+public class EnquiryController : CleanArchitectureTemplateController
 {
     private IRepositoryConductor<Enquiry>    EnquiryConductor   { get; }
-    private IEmailHandler                    EmailHandler       { get; }
-    private IHtmlTemplate                    HtmlTemplate       { get; }
     private IMapper                          Mapper             { get; }
     public IUserAgentConductor               UserAgentConductor { get; }
 
     public EnquiryController(
         IRepositoryConductor<Enquiry>   enquiryConductor,
-        IEmailHandler                   emailHandler,
-        IHtmlTemplate                   htmlTemplate,
         IMapper                         mapper,
         IUserAgentConductor             userAgentConductor)
     {
         EnquiryConductor    = enquiryConductor;
-        EmailHandler        = emailHandler;
-        HtmlTemplate        = htmlTemplate;
         Mapper              = mapper;
         UserAgentConductor  = userAgentConductor;
     }
 
 
-    [AppAuthorize]
+
+    [AppAuthorize(UserRole.Admin)]
     [HttpGet]
     public IActionResult Index(
         string?     searchText,
@@ -57,6 +50,7 @@ public class EnquiryController : GenogramSystemController
         return Ok(dtos, rowCount);
     }
 
+
     [HttpPost]
     public IActionResult Post([FromBody] EnquiryDto dto)
     {       
@@ -71,28 +65,12 @@ public class EnquiryController : GenogramSystemController
 
         SaveCount(visitorId, false);
 
-        var (ipAddress, operatingSystem, browser, device) = UserAgentConductor.GetUserAgent(HttpContext);
-        Dictionary<string, string> substitutions = new()
-        {
-            { "Name",               enquiry.Name },
-            { "Email",              enquiry.Email },
-            { "Message",            enquiry.Message },
-            { "OperatingSystem",    operatingSystem },
-            { "BrowserName",        browser },
-            { "IPAddress",          ipAddress },
-            { "Device",             device }
-        };
-        string emailbody = HtmlTemplate.EnquiryThanks(substitutions);
 
-        EmailHandler.Send(emailbody, "New Inquiry", new string[] { dto.Email });
-        emailbody = emailbody.Replace("Thank you for contacting us! We will be in touch shortly", "")
-                             .Replace(enquiry.Name, "Team");
-        var reponse = EmailHandler.Send(emailbody, "New Inquiry");
-
-        return Ok(reponse);
+        return Ok(true);
     }
 
-    [AppAuthorize]
+
+    [AppAuthorize(UserRole.Admin)]
     [HttpPut("{id:Guid}")]
     public IActionResult Put(Guid id, [FromBody] EnquiryResolutionDto dto)
     {
@@ -118,7 +96,8 @@ public class EnquiryController : GenogramSystemController
         return Ok(updateResult.ResultObject);
     }
 
-    [AppAuthorize]
+
+    [AppAuthorize(UserRole.Admin)]
     [HttpDelete("{id:Guid}")]
     public IActionResult Delete(Guid id)
     {

@@ -1,6 +1,6 @@
-﻿using GenogramSystem.Core.Enumerations;
+﻿using CleanArchitectureTemplate.Core.Enumerations;
 
-namespace GenogramSystem.WebApp.Filters;
+namespace CleanArchitectureTemplate.WebApp.Filters;
 
 public class AppAuthorizeAttribute : TypeFilterAttribute
 {

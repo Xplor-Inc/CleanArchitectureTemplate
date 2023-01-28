@@ -1,7 +1,7 @@
-using GenogramSystem.Core.Enumerations;
+using CleanArchitectureTemplate.Core.Enumerations;
 
-namespace GenogramSystem.WebApp.Extensions.Controllers;
-public class GenogramSystemClaimsPrincipal
+namespace CleanArchitectureTemplate.WebApp.Extensions.Controllers;
+public class CleanArchitectureTemplateClaimsPrincipal
 {
     public virtual UserRole    UserRole                { get; set; }
     public virtual long        UserId                  { get; set; }

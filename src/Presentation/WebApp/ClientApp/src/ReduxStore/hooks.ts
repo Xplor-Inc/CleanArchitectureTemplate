@@ -3,7 +3,7 @@ import { UserRoles } from '../Components/Enums'
 import type { RootState, AppDispatch } from './store'
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
-export interface UserState {
+export interface IUserHookState {
     name: string
     image: string,
     isLoggedIn: boolean,

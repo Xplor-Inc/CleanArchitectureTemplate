@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace GenogramSystem.WebApp.Utilities;
+namespace CleanArchitectureTemplate.WebApp.Utilities;
 public static class PrincipalValidator
 {
     public static async Task ValidateAsync(CookieValidatePrincipalContext context)
@@ -13,7 +13,7 @@ public static class PrincipalValidator
             return;
         }
         var securityStamp   = context.Principal?.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.AuthenticationInstant)?.Value;
-        var dbContext       = context.HttpContext.RequestServices.GetRequiredService<GenogramSystemContext>();
+        var dbContext       = context.HttpContext.RequestServices.GetRequiredService<CleanArchitectureTemplateContext>();
         var user            = await dbContext.Users.FirstOrDefaultAsync(e => e.Id == long.Parse(userId));
         if (user == null || user.DeletedOn.HasValue || user.SecurityStamp != securityStamp)
         {

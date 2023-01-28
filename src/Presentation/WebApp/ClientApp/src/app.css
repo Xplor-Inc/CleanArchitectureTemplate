@@ -1,3 +1,12 @@
+.rw-widget-picker {
+    min-height: 33px !important;
+}
+
+.required::after{
+    content: "*";
+    color: red;
+    font-weight: 900;
+}
 .svg-action {
     font-size: 2rem;
     cursor: pointer;
@@ -115,3 +124,77 @@ th {
         position: initial;
     }
 }
+
+/* Notifications CSS */
+
+@keyframes marquee {
+  0% {text-indent: 100%;}
+  100% {text-indent: -100%;}
+}
+
+.rightCSS { 
+  background: #1f415f;
+  overflow: hidden;
+  color: white;
+  height:35px;
+} 
+.rightCSS div {
+  position: relative;
+  animation: CSSright linear 20s infinite;
+} 
+@keyframes CSSright {
+  0% { right: -100% }
+  100% { right: 100% }
+}
+.rightCSS:hover div {
+  animation-play-state: paused;
+}
+
+.li {
+  /* width: 100%; */
+  padding-bottom: 1%;
+  /* border-radius: 0.5em; */
+  box-shadow: 0 0.1em 0.5em;
+}
+
+/*********************       Auto Complete           *****************/
+
+.no-suggestions {
+    color: #999;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.suggestions {
+    border: 1px solid #ced4da;
+    border-top-width: 0;
+    list-style: none;
+    margin-top: 0;
+    max-height: 143px;
+    overflow-y: auto;
+    padding-left: 0;
+    width: auto;
+    position: absolute;
+    background: white;
+    z-index:9999;
+}
+
+
+    .suggestions li {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+        .suggestion-active,
+        .suggestions li:hover {
+            background: linear-gradient( 90deg, hsla(218, 100%, 42%, 0.6) 0%, hsla(0, 0%, 98%, 1) 200% );
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .suggestions li:not(:last-of-type) {
+            border-bottom: 1px solid #999;
+        }
+
+/***************                ************/

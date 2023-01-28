@@ -1,14 +1,14 @@
-﻿using GenogramSystem.Core.Interfaces.Conductors.Accounts;
-using GenogramSystem.Core.Models.Security;
-using GenogramSystem.WebApp.Models.Dtos.Accounts;
-using GenogramSystem.WebApp.Models.Dtos.Users;
-using GenogramSystem.WebApp.Utilities;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Conductors.Accounts;
+using CleanArchitectureTemplate.Core.Models.Security;
+using CleanArchitectureTemplate.WebApp.Models.Dtos.Accounts;
+using CleanArchitectureTemplate.WebApp.Models.Dtos.Users;
+using CleanArchitectureTemplate.WebApp.Utilities;
 using System.Security.Claims;
 
-namespace GenogramSystem.WebApp.Endpoints;
+namespace CleanArchitectureTemplate.WebApp.Endpoints;
 
 [Route("api/1.0/account")]
-public class AccountController : GenogramSystemController
+public class AccountController : CleanArchitectureTemplateController
 {
     #region Properties
     public IAccountConductor                    AccountConductor        { get; }
@@ -74,6 +74,15 @@ public class AccountController : GenogramSystemController
     {
         try
         {
+            if (User.IsAuthenticated())
+            {
+                var logoutResult = AccountConductor.UpdateLogout(CurrentUserId);
+                if (logoutResult.HasErrors)
+                {
+                    var error = logoutResult.GetErrors();
+                    Logger.LogWarning("User login failed for {CurrentUserId}, Error: {error}", CurrentUserId, error);
+                }
+            }
             await HttpContext.SignOutAsync(CookieAuthentication.AuthenticationScheme);
             return Ok(true);
         }

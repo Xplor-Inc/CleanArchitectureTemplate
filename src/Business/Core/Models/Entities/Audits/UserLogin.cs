@@ -1,6 +1,6 @@
-﻿using GenogramSystem.Core.Models.Entities.Users;
+﻿using CleanArchitectureTemplate.Core.Models.Entities.Users;
 
-namespace GenogramSystem.Core.Models.Entities.Audits;
+namespace CleanArchitectureTemplate.Core.Models.Entities.Audits;
 public class UserLogin : Entity
 {
     public new long?    CreatedById        { get; set; }

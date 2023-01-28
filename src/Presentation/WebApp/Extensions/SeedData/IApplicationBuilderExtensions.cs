@@ -1,11 +1,11 @@
-﻿using GenogramSystem.Core.Interfaces.Utility.Security;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Utility.Security;
 
-namespace GenogramSystem.WebApp.Extensions.SeedData;
+namespace CleanArchitectureTemplate.WebApp.Extensions.SeedData;
 public static class IApplicationBuilderExtensions
 {
     public static void ConfigureSeedData(this IApplicationBuilder _, IServiceScope serviceScope)
     {
-        var context = serviceScope.ServiceProvider.GetService<GenogramSystemContext>();
+        var context = serviceScope.ServiceProvider.GetService<CleanArchitectureTemplateContext>();
         if (context == null) throw new InvalidOperationException("context");
         context.Database.SetCommandTimeout(10000);
         context.Database.Migrate();

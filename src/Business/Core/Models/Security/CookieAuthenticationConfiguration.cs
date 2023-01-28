@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Models.Security;
+﻿namespace CleanArchitectureTemplate.Core.Models.Security;
 public class CookieAuthenticationConfiguration
 {
     public string AuthenticationScheme      { get; set; } = string.Empty;

@@ -42,7 +42,7 @@ $outputPath = "../Publish/"+$NewValue
 
 Write-Output ("Publishing application to " + $outputPath  +" in Release mode with X86 Config  self-contained`r`n")
 
-dotnet publish "../src/GenogramSystem.sln" -c Release -r win-x86 --self-contained true --output $outputPath
+dotnet publish "../src/CleanArchitectureTemplate.sln" -c Release -r win-x86 --self-contained true --output $outputPath
 Write-Output ("`r`n Published successfully to "+ $outputPath +"`r`n")
 
 $webConfig = ($outputPath+"/web.config")

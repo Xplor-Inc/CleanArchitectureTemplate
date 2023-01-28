@@ -1,8 +1,8 @@
-﻿using GenogramSystem.Core.Interfaces.Utility.Security;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Utility.Security;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
 
-namespace GenogramSystem.Core.Utilities.Security;
+namespace CleanArchitectureTemplate.Core.Utilities.Security;
 public class Encryption : IEncryption
 {
     public string GenerateSalt()

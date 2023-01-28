@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Models.Errors;
+﻿namespace CleanArchitectureTemplate.Core.Models.Errors;
     public class Result<T>
     {
         #region Properties

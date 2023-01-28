@@ -2,21 +2,13 @@
     <nav class="navbar-expand-sm navbar-toggleable-sm box-shadow fixed-top navbar navbar-light" style="background: #1f415f">
         <div class="box-container container">
             <a class="navbar-brand" href="/">
-                <img src="/images/favicon.jpg" alt="Logo">
+                <img src="/Images/icon.jpeg" alt="Logo">
             </a>
             <button aria-label="Toggle navigation" type="button" class="mr-2 navbar-toggler">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    @{
-                        if(User.IsAuthenticated())
-                        {
-                            <li class="nav-item">
-                                <a class="text-dark nav-link page" href="/users">Users</a>
-                            </li>
-                        }
-                    }
                     <li class="nav-item">
                         <a class="text-dark nav-link page" href="/">Home</a>
                     </li>

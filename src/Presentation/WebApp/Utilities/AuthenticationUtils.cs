@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.WebApp.Utilities;
+﻿namespace CleanArchitectureTemplate.WebApp.Utilities;
 public class AuthenticationUtils
 {
     public static AuthenticationProperties GetAuthenticationProperties()

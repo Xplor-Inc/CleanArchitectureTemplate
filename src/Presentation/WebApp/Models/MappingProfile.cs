@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.WebApp.Models;
+﻿namespace CleanArchitectureTemplate.WebApp.Models;
 public class MappingProfile : Profile
 {
     public MappingProfile()
@@ -9,7 +9,12 @@ public class MappingProfile : Profile
         CreateMap<User,                 UserDto>()
             .ReverseMap();
 
+
         CreateMap<Counter,              CounterDto>()
             .ReverseMap();
+
+        CreateMap<Notification,         NotificationDto>()
+            .ReverseMap();
+
     }
 }

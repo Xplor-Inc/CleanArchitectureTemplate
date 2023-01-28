@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Interfaces.Utility;
+﻿namespace CleanArchitectureTemplate.Core.Interfaces.Utility;
 
 public interface IUserAgentConductor
 {

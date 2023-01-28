@@ -1,6 +1,6 @@
-﻿using GenogramSystem.SqlServer.Maps;
+﻿using CleanArchitectureTemplate.SqlServer.Maps;
 
-namespace GenogramSystem.SqlServer.Extensions;
+namespace CleanArchitectureTemplate.SqlServer.Extensions;
 public static class ModelBuilderExtensions
 {
     public static void AddMapping<TEntity>(this ModelBuilder builder, Map<TEntity> map) where TEntity : class

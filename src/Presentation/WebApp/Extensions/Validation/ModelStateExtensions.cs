@@ -1,8 +1,8 @@
-﻿using GenogramSystem.Core.Extensions;
-using GenogramSystem.Core.Models.Errors;
+﻿using CleanArchitectureTemplate.Core.Extensions;
+using CleanArchitectureTemplate.Core.Models.Errors;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace GenogramSystem.WebApp.Extensions.Validation;
+namespace CleanArchitectureTemplate.WebApp.Extensions.Validation;
 public static class ModelStateExtensions
 {
     public static Result<T> ToResult<T>(this ModelStateDictionary modelState)

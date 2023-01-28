@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.SqlServer.Maps.Audits;
+﻿namespace CleanArchitectureTemplate.SqlServer.Maps.Audits;
 public class ChangeLogMap : Map<ChangeLog>
 {
     public override void Configure(EntityTypeBuilder<ChangeLog> entity)

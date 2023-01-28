@@ -1,7 +1,4 @@
-﻿using GenogramSystem.Core.Constants;
-using GenogramSystem.Core.Models.Entities.Users;
-
-namespace GenogramSystem.SqlServer.Maps.Users;
+﻿namespace CleanArchitectureTemplate.SqlServer.Maps.Users;
 public class AccountRecoveryMap : Map<AccountRecovery>
 {
     public override void Configure(EntityTypeBuilder<AccountRecovery> entity)

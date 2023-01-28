@@ -1,19 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="~/Images/favicon.jpg" type="image/x-icon" rel="icon" />
-    <title>@ViewBag.Title :: Xploring Tech World </title>
+    <title>@ViewBag.Title :: Xploring Me </title>
     <meta name="google-site-verification" content="H0IjBAaN5KCjPXy9T8cAeoSOvSCVj1XoWuCNIS4DGcU" />
     <link href="/lib/css/site.css" rel="stylesheet" type="text/css" async asp-append-version="true" />
     <link href="/lib/css/custom.css" rel="stylesheet" type="text/css" async asp-append-version="true" />
     <link href="/lib/css/loader.css" rel="stylesheet" type="text/css" async asp-append-version="true" />
     <link href="/lib/css/NavMenu.css" rel="stylesheet" type="text/css" async asp-append-version="true" />
-    <link href="~/lib/css/fontawesome.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -42,7 +39,9 @@
         var u = window.location.pathname;
         for (var i = 0; i < p.length; i++) {
             var href = p[i].getAttribute("href");
-            if (href === u)
+            if (u.includes("services") && href.includes("services"))
+                p[i].classList.add('active');
+            else if (href === u)
                 p[i].classList.add('active');
             else
                 p[i].classList.remove('active')

@@ -22,12 +22,13 @@ const Login = () => {
     let navigate = useNavigate();
     useEffect(() => {
         if (isLoggedIn) {
-            navigate(ROUTE_END_POINTS.CONSIGNMENT)
+            navigate(ROUTE_END_POINTS.USERS)
             return
         }
     })
 
-    const [loginData, SetLoginData] = useState<{ email: string, password: string, isLoading: boolean }>({ email: '', isLoading: false, password: '' })
+    const [loginData, SetLoginData] = useState<{ email: string, password: string, isLoading: boolean }>
+        ({ email: '', isLoading: false, password: '' })
     const dispatch = useAppDispatch()
 
     const processLogin = async (e: React.MouseEvent<HTMLInputElement>) => {
@@ -64,7 +65,7 @@ const Login = () => {
                 currentUserId: response.resultObject.uniqueId
             }))
             SetLoginData({ ...loginData, isLoading: false })
-            navigate(ROUTE_END_POINTS.CONSIGNMENT)
+            navigate(ROUTE_END_POINTS.USERS)
         }
     }
 

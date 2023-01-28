@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Utilities;
+﻿namespace CleanArchitectureTemplate.Core.Utilities;
 public class Do<T>
 {
     #region Properties

@@ -1,1 +1,1 @@
-Clean Architecture template repository.
+Clean Architecture template repository with .net7 and reactJS.

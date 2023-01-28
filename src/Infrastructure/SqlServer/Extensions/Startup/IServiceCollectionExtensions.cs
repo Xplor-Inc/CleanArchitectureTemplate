@@ -1,7 +1,7 @@
-using GenogramSystem.SqlServer.Repositories;
-using GenogramSystem.Core.Interfaces.Data;
+using CleanArchitectureTemplate.SqlServer.Repositories;
+using CleanArchitectureTemplate.Core.Interfaces.Data;
 
-namespace GenogramSystem.SqlServer.Extensions;
+namespace CleanArchitectureTemplate.SqlServer.Extensions;
 public static class IServiceCollectionExtensions
 {
     public static IServiceCollection AddSqlRepository(this IServiceCollection services)

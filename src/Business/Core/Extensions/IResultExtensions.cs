@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Extensions;
+﻿namespace CleanArchitectureTemplate.Core.Extensions;
 public static class IResultExtensions
 {
     public static string AddError<T>(this Result<T> result, string error)

@@ -1,6 +1,6 @@
-﻿using GenogramSystem.Core.Models.Errors;
+﻿using CleanArchitectureTemplate.Core.Models.Errors;
 
-namespace GenogramSystem.WebApp.Extensions;
+namespace CleanArchitectureTemplate.WebApp.Extensions;
 public static class ExceptionMiddlewareExtensions
 {
     public static void ConfigureExceptionHandler(this IApplicationBuilder app)

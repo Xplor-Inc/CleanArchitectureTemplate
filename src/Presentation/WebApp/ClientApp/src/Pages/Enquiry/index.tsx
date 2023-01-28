@@ -6,6 +6,7 @@ import { IEnquiryDto } from "../../Components/Core/Dto/Enquiry";
 import { IResult } from "../../Components/Core/Dto/IResultObject";
 import { IPagingResult } from "../../Components/Core/Dto/Paging";
 import SearchParams from "../../Components/Core/Dto/SearchParams";
+import { EnquiryTypes } from "../../Components/Enums";
 import { Service } from "../../Components/Service";
 import { Utility } from "../../Components/Service/Utility";
 import { Loader } from "../Components/Loader";
@@ -57,7 +58,7 @@ export default class Users extends Component<{}, IEnquiryState>{
 
     searchEnquiries = async () => {
         if (Utility.Validate.String(this.state.search.searchText))
-            this.getEnquiries(0,this.state.search)
+            this.getEnquiries(0, this.state.search)
     }
 
     getEnquiries = async (skip: number, s: SearchParams) => {
@@ -105,6 +106,10 @@ export default class Users extends Component<{}, IEnquiryState>{
 
     postResolution = async (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
         e.preventDefault();
+        if (this.state.resolution.length === 0) {
+            toast.error('Enter resolution');
+            return
+        }
         var formData = {
             resolution: this.state.resolution
         };
@@ -130,11 +135,11 @@ export default class Users extends Component<{}, IEnquiryState>{
         const { isLoading, enquiries, resolution, isUpdating, viewResolution } = this.state
         return (
             <>
-                <div className="card m-3">
+                <div className="card">
                     {isLoading ? <Loader /> : null}
                     <PageTitle title='Review Enquiries' />
                     <h3 className="card-header">Review Enquiries</h3>
-                    <div className="card-body">
+                    <div className="card-body p-0">
                         <form method="post">
                             <div className="row">
                                 <div className="col-md-6">
@@ -144,9 +149,9 @@ export default class Users extends Component<{}, IEnquiryState>{
                                         onChange={(e) => { this.setState({ search: { ...this.state.search, searchText: e.target.value } }) }} />
                                 </div>
                                 <div className="col-md-6 button-pt">
-                                    <button type="button" className="btn btn-outline-info" onClick={this.searchEnquiries}> Search</button>
-                                    <button type="button" className="btn btn-outline-warning ms-3" onClick={()=>{this.setState({search:new SearchParams()}); this.getEnquiries(0, new SearchParams());}}> Reset</button>
-                               </div>
+                                    <button type="button" className="btn btn-primary" onClick={this.searchEnquiries}> Search</button>
+                                    <button type="button" className="btn btn-warning ms-3" onClick={() => { this.setState({ search: new SearchParams() }); this.getEnquiries(0, new SearchParams()); }}> Reset</button>
+                                </div>
                             </div>
                         </form>
                         <hr />
@@ -165,7 +170,8 @@ export default class Users extends Component<{}, IEnquiryState>{
                             <table className="table" id="datatable">
                                 <thead>
                                     <tr>
-                                        <th className="text-center">SR #</th>
+                                        <th>SR #</th>
+                                        <th>Type</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Message</th>
@@ -178,19 +184,19 @@ export default class Users extends Component<{}, IEnquiryState>{
                                         enquiries.map((enquiry, index) => {
                                             return <tr key={enquiry.uniqueId}>
                                                 <td>{index + 1}</td>
+                                                <td>{EnquiryTypes[enquiry.enquiryType]}</td>
                                                 <td>{enquiry.name}</td>
                                                 <td>{enquiry.email}</td>
                                                 <td>{enquiry.message}</td>
                                                 <td>{Utility.Format.DateTime_DD_MMM_YY_HH_MM_SS(enquiry.createdOn)}</td>
                                                 <td>
-                                                    {
-                                                        enquiry.isResolved ?
-                                                            <a href="#edit" title='Edit' onClick={() => this.setState({viewResolution: enquiry.resolution})}>
-                                                                <FaEye size={'1.4rem'} color='#755139FF' />
-                                                            </a> :
-                                                            <a href="#edit" title='Edit' onClick={() => this.setState({ isUpdating: true, id: enquiry.uniqueId, })}>
-                                                                <FaEdit size={'1.4rem'} color='#755139FF' />
-                                                            </a>
+                                                    {enquiry.isResolved ?
+                                                        <a href="#edit" title='Edit' onClick={() => this.setState({ viewResolution: enquiry.resolution })}>
+                                                            <FaEye size={'1.4rem'} color='#755139FF' />
+                                                        </a> :
+                                                        <a href="#edit" title='Edit' onClick={() => this.setState({ isUpdating: true, id: enquiry.uniqueId, })}>
+                                                            <FaEdit size={'1.4rem'} color='#755139FF' />
+                                                        </a>
                                                     }
                                                 </td>
                                             </tr>
@@ -198,9 +204,9 @@ export default class Users extends Component<{}, IEnquiryState>{
                                     }
                                     {
                                         enquiries.length === 0 ?
-                                        <tr>
-                                            <td colSpan={7}>There is no enquiry data</td>
-                                        </tr> : null
+                                            <tr>
+                                                <td colSpan={7}>There is no enquiry data</td>
+                                            </tr> : null
                                     }
                                 </tbody>
                             </table>
@@ -219,7 +225,7 @@ export default class Users extends Component<{}, IEnquiryState>{
                                             onChange={(e) => { this.setState({ resolution: e.target.value }) }} />
                                     </div>
                                     <div className="col-md-6 button-pt">
-                                        <button type="button" className="btn btn-outline-info" onClick={(e) => this.postResolution(e)}> Update</button>
+                                        <button type="button" className="btn btn-primary" onClick={(e) => this.postResolution(e)}> Update</button>
                                     </div>
                                 </div>
                             </form>

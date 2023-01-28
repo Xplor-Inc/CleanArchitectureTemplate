@@ -1,13 +1,13 @@
-﻿using GenogramSystem.Core.Interfaces.Data;
+﻿using CleanArchitectureTemplate.Core.Interfaces.Data;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace GenogramSystem.SqlServer;
+namespace CleanArchitectureTemplate.SqlServer;
 public abstract class Context : DbContext, IContext
 {
     #region Member Variables
 
-    private readonly string         _connectionString = string.Empty;
-    private readonly ILoggerFactory _loggerFactory;
+    private readonly string          _connectionString = string.Empty;
+    private readonly ILoggerFactory? _loggerFactory;
 
     #endregion
 
@@ -32,7 +32,7 @@ public abstract class Context : DbContext, IContext
             optionsBuilder.UseLoggerFactory(_loggerFactory).EnableSensitiveDataLogging();
         }
 
-        optionsBuilder.UseMySql(connectionString: _connectionString, serverVersion: ServerVersion.AutoDetect(_connectionString));
+        optionsBuilder.UseSqlServer(connectionString: _connectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -106,7 +106,7 @@ public abstract class Context : DbContext, IContext
     #region Private Methods
     private EntityEntry GetEntityEntry<T>(T entity) where T : class
     {
-        var entry = Entry<T>(entity);
+        var entry = Entry(entity);
 
         if (entry.State == EntityState.Deleted)
         {

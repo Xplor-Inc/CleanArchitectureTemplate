@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.WebApp.Models.Dtos.Counters;
+﻿namespace CleanArchitectureTemplate.WebApp.Models.Dtos.Counters;
 
 public class CounterDto : AuditableDto
 {

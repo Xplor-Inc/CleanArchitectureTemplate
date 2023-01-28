@@ -1,4 +1,4 @@
-﻿namespace GenogramSystem.Core.Extensions;
+﻿namespace CleanArchitectureTemplate.Core.Extensions;
 public static class ClaimsPrincipalExtensions
 {
     public static UserRole? RoleType(this ClaimsPrincipal principal)
